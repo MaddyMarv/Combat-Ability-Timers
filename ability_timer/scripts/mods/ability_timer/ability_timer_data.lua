@@ -23,9 +23,9 @@ local widgets = {
 						default_value = "both",
 						localize = true,
 						options = {
-							{ text = "display_mode_both",          value = "both" },
+							{ text = "display_mode_both", value = "both" },
 							{ text = "display_mode_progress_only", value = "progress_only" },
-							{ text = "display_mode_timer_only",    value = "timer_only" },
+							{ text = "display_mode_timer_only", value = "timer_only" },
 						},
 					},
 					{
@@ -66,7 +66,7 @@ local widgets = {
 						localize = true,
 						options = {
 							{ text = "cooldown_target_next_charge", value = "next_charge" },
-							{ text = "cooldown_target_until_full",  value = "until_full" },
+							{ text = "cooldown_target_until_full", value = "until_full" },
 						},
 					},
 				},
@@ -89,11 +89,11 @@ local widgets = {
 						default_value = "both",
 						localize = true,
 						options = {
-							{ text = "bubble_mode_both",               value = "both" },
+							{ text = "bubble_mode_both", value = "both" },
 							{ text = "bubble_mode_both_chronological", value = "both_chronological" },
-							{ text = "bubble_mode_lowest",             value = "lowest" },
-							{ text = "bubble_mode_newest",             value = "newest" },
-							{ text = "bubble_mode_oldest",             value = "oldest" },
+							{ text = "bubble_mode_lowest", value = "lowest" },
+							{ text = "bubble_mode_newest", value = "newest" },
+							{ text = "bubble_mode_oldest", value = "oldest" },
 						},
 					},
 				},
@@ -157,7 +157,7 @@ local widgets = {
 						default_value = 0,
 						options = {
 							{ text = "orientation_horizontal", value = 0 },
-							{ text = "orientation_vertical",   value = 1 },
+							{ text = "orientation_vertical", value = 1 },
 						},
 					},
 					{
@@ -166,8 +166,8 @@ local widgets = {
 						type = "dropdown",
 						default_value = 1,
 						options = {
-							{ text = "bar_dir_start",  value = 1 },
-							{ text = "bar_dir_end",    value = 2 },
+							{ text = "bar_dir_start", value = 1 },
+							{ text = "bar_dir_end", value = 2 },
 							{ text = "bar_dir_center", value = 3 },
 						},
 					},
@@ -191,7 +191,7 @@ local widgets = {
 						default_value = "until_full",
 						localize = true,
 						options = {
-							{ text = "cooldown_target_until_full",  value = "until_full" },
+							{ text = "cooldown_target_until_full", value = "until_full" },
 							{ text = "cooldown_target_next_charge", value = "next_charge" },
 						},
 					},
@@ -242,10 +242,10 @@ local widgets = {
 						localize = true,
 						options = {
 							{ text = "notches_none", value = 0 },
-							{ text = "notches_2",    value = 2 },
-							{ text = "notches_3",    value = 3 },
-							{ text = "notches_4",    value = 4 },
-							{ text = "notches_6",    value = 6 },
+							{ text = "notches_2", value = 2 },
+							{ text = "notches_3", value = 3 },
+							{ text = "notches_4", value = 4 },
+							{ text = "notches_6", value = 6 },
 						},
 					},
 					{
@@ -286,7 +286,7 @@ local widgets = {
 						localize = true,
 						options = {
 							{ text = "cooldown_mode_smooth", value = "smooth" },
-							{ text = "cooldown_mode_full",   value = "full" },
+							{ text = "cooldown_mode_full", value = "full" },
 						},
 					},
 				},
@@ -499,9 +499,9 @@ local widgets = {
 						default_value = "left",
 						localize = true,
 						options = {
-							{ text = "align_left",   value = "left" },
+							{ text = "align_left", value = "left" },
 							{ text = "align_center", value = "center" },
-							{ text = "align_right",  value = "right" },
+							{ text = "align_right", value = "right" },
 						},
 					},
 				},
@@ -545,9 +545,9 @@ local widgets = {
 						default_value = "right",
 						localize = true,
 						options = {
-							{ text = "align_left",   value = "left" },
+							{ text = "align_left", value = "left" },
 							{ text = "align_center", value = "center" },
-							{ text = "align_right",  value = "right" },
+							{ text = "align_right", value = "right" },
 						},
 					},
 				},
@@ -591,9 +591,9 @@ local widgets = {
 						default_value = "center",
 						localize = true,
 						options = {
-							{ text = "align_left",   value = "left" },
+							{ text = "align_left", value = "left" },
 							{ text = "align_center", value = "center" },
-							{ text = "align_right",  value = "right" },
+							{ text = "align_right", value = "right" },
 						},
 					},
 				},
@@ -610,10 +610,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_veteran"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "veteran_ability_default", display_name = mod:localize("veteran_ability_default"), type = "checkbox", default_value = true },
-					{ setting_id = "veteran_ability_stance",  display_name = mod:localize("veteran_ability_stance"),  type = "checkbox", default_value = true },
-					{ setting_id = "veteran_ability_stealth", display_name = mod:localize("veteran_ability_stealth"), type = "checkbox", default_value = true },
-					{ setting_id = "veteran_ability_shout",   display_name = mod:localize("veteran_ability_shout"),   type = "checkbox", default_value = true },
+					{
+						setting_id = "veteran_ability_default",
+						display_name = mod:localize("veteran_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "veteran_ability_stance",
+						display_name = mod:localize("veteran_ability_stance"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "veteran_ability_stealth",
+						display_name = mod:localize("veteran_ability_stealth"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "veteran_ability_shout",
+						display_name = mod:localize("veteran_ability_shout"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -621,10 +641,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_zealot"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "zealot_ability_default",      display_name = mod:localize("zealot_ability_default"),      type = "checkbox", default_value = true },
-					{ setting_id = "zealot_ability_dash",         display_name = mod:localize("zealot_ability_dash"),         type = "checkbox", default_value = true },
-					{ setting_id = "zealot_ability_invisibility", display_name = mod:localize("zealot_ability_invisibility"), type = "checkbox", default_value = true },
-					{ setting_id = "zealot_ability_relic",        display_name = mod:localize("zealot_ability_relic"),        type = "checkbox", default_value = true },
+					{
+						setting_id = "zealot_ability_default",
+						display_name = mod:localize("zealot_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "zealot_ability_dash",
+						display_name = mod:localize("zealot_ability_dash"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "zealot_ability_invisibility",
+						display_name = mod:localize("zealot_ability_invisibility"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "zealot_ability_relic",
+						display_name = mod:localize("zealot_ability_relic"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -632,10 +672,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_psyker"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "psyker_ability_default",    display_name = mod:localize("psyker_ability_default"),    type = "checkbox", default_value = true },
-					{ setting_id = "psyker_ability_shout",      display_name = mod:localize("psyker_ability_shout"),      type = "checkbox", default_value = true },
-					{ setting_id = "psyker_ability_overcharge", display_name = mod:localize("psyker_ability_overcharge"), type = "checkbox", default_value = true },
-					{ setting_id = "psyker_ability_shield",     display_name = mod:localize("psyker_ability_shield"),     type = "checkbox", default_value = true },
+					{
+						setting_id = "psyker_ability_default",
+						display_name = mod:localize("psyker_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "psyker_ability_shout",
+						display_name = mod:localize("psyker_ability_shout"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "psyker_ability_overcharge",
+						display_name = mod:localize("psyker_ability_overcharge"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "psyker_ability_shield",
+						display_name = mod:localize("psyker_ability_shield"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -643,10 +703,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_ogryn"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "ogryn_ability_default",        display_name = mod:localize("ogryn_ability_default"),        type = "checkbox", default_value = true },
-					{ setting_id = "ogryn_ability_charge",        display_name = mod:localize("ogryn_ability_charge"),        type = "checkbox", default_value = true },
-					{ setting_id = "ogryn_ability_ranged_stance", display_name = mod:localize("ogryn_ability_ranged_stance"), type = "checkbox", default_value = true },
-					{ setting_id = "ogryn_ability_taunt",         display_name = mod:localize("ogryn_ability_taunt"),         type = "checkbox", default_value = true },
+					{
+						setting_id = "ogryn_ability_default",
+						display_name = mod:localize("ogryn_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "ogryn_ability_charge",
+						display_name = mod:localize("ogryn_ability_charge"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "ogryn_ability_ranged_stance",
+						display_name = mod:localize("ogryn_ability_ranged_stance"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "ogryn_ability_taunt",
+						display_name = mod:localize("ogryn_ability_taunt"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -654,9 +734,24 @@ local widgets = {
 				display_name = mod:localize("ability_filters_arbites"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "arbites_ability_drone",  display_name = mod:localize("arbites_ability_drone"),  type = "checkbox", default_value = true },
-					{ setting_id = "arbites_ability_charge", display_name = mod:localize("arbites_ability_charge"), type = "checkbox", default_value = true },
-					{ setting_id = "arbites_ability_stance", display_name = mod:localize("arbites_ability_stance"), type = "checkbox", default_value = true },
+					{
+						setting_id = "arbites_ability_drone",
+						display_name = mod:localize("arbites_ability_drone"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "arbites_ability_charge",
+						display_name = mod:localize("arbites_ability_charge"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "arbites_ability_stance",
+						display_name = mod:localize("arbites_ability_stance"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -664,10 +759,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_broker"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "broker_ability_default",     display_name = mod:localize("broker_ability_default"),     type = "checkbox", default_value = true },
-					{ setting_id = "broker_ability_focus",       display_name = mod:localize("broker_ability_focus"),       type = "checkbox", default_value = true },
-					{ setting_id = "broker_ability_punk_rage",   display_name = mod:localize("broker_ability_punk_rage"),   type = "checkbox", default_value = true },
-					{ setting_id = "broker_ability_stimm_field", display_name = mod:localize("broker_ability_stimm_field"), type = "checkbox", default_value = true },
+					{
+						setting_id = "broker_ability_default",
+						display_name = mod:localize("broker_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "broker_ability_focus",
+						display_name = mod:localize("broker_ability_focus"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "broker_ability_punk_rage",
+						display_name = mod:localize("broker_ability_punk_rage"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "broker_ability_stimm_field",
+						display_name = mod:localize("broker_ability_stimm_field"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 			{
@@ -675,10 +790,30 @@ local widgets = {
 				display_name = mod:localize("ability_filters_cryptic"),
 				type = "group",
 				sub_widgets = {
-					{ setting_id = "cryptic_ability_default",          display_name = mod:localize("cryptic_ability_default"),          type = "checkbox", default_value = true },
-					{ setting_id = "cryptic_ability_discharge",        display_name = mod:localize("cryptic_ability_discharge"),        type = "checkbox", default_value = true },
-					{ setting_id = "cryptic_ability_precision_stance", display_name = mod:localize("cryptic_ability_precision_stance"), type = "checkbox", default_value = true },
-					{ setting_id = "cryptic_ability_chordclaw",        display_name = mod:localize("cryptic_ability_chordclaw"),        type = "checkbox", default_value = true },
+					{
+						setting_id = "cryptic_ability_default",
+						display_name = mod:localize("cryptic_ability_default"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "cryptic_ability_discharge",
+						display_name = mod:localize("cryptic_ability_discharge"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "cryptic_ability_precision_stance",
+						display_name = mod:localize("cryptic_ability_precision_stance"),
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "cryptic_ability_chordclaw",
+						display_name = mod:localize("cryptic_ability_chordclaw"),
+						type = "checkbox",
+						default_value = true,
+					},
 				},
 			},
 		},

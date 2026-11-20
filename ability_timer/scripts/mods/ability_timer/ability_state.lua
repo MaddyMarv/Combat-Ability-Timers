@@ -7,23 +7,79 @@ local MIN_TIME = 0.05
 
 local ABILITY_GROUPS = {
 	veteran = {
-		volley_fire_stance = { setting_id = "veteran_ability_stance", buff_templates = { "veteran_combat_ability_stance_master", "veteran_combat_ability_stance_master_increased_duration" } },
-		veteran_stealth = { setting_id = "veteran_ability_stealth", buff_templates = { "veteran_invisibility", "veteran_damage_bonus_leaving_invisibility", "veteran_toughness_bonus_leaving_invisibility" } },
-		voice_of_command = { setting_id = "veteran_ability_shout", buff_templates = { "veteran_combat_ability_increase_toughness_to_coherency" } },
+		volley_fire_stance = {
+			setting_id = "veteran_ability_stance",
+			buff_templates = {
+				"veteran_combat_ability_stance_master",
+				"veteran_combat_ability_stance_master_increased_duration",
+			},
+		},
+		veteran_stealth = {
+			setting_id = "veteran_ability_stealth",
+			buff_templates = {
+				"veteran_invisibility",
+				"veteran_damage_bonus_leaving_invisibility",
+				"veteran_toughness_bonus_leaving_invisibility",
+			},
+		},
+		voice_of_command = {
+			setting_id = "veteran_ability_shout",
+			buff_templates = { "veteran_combat_ability_increase_toughness_to_coherency" },
+		},
 	},
 	zealot = {
-		zealot_dash = { setting_id = "zealot_ability_dash", buff_templates = { "zealot_dash_buff", "zealot_combat_ability_attack_speed_increase", "zealot_combat_ability_attack_speed_increased_duration" } },
-		bolstering_prayer = { setting_id = "zealot_ability_relic", buff_templates = { "zealot_channel_toughness_bonus", "zealot_channel_damage", "zealot_channel_toughness_damage_reduction" } },
-		zealot_invisibility = { setting_id = "zealot_ability_invisibility", buff_templates = { "zealot_invisibility", "zealot_invisibility_increased_duration", "zealot_leaving_stealth_restores_toughness", "zealot_stealth_improved_with_block", "zealot_decrease_threat_increase_backstab_damage" } },
+		zealot_dash = {
+			setting_id = "zealot_ability_dash",
+			buff_templates = {
+				"zealot_dash_buff",
+				"zealot_combat_ability_attack_speed_increase",
+				"zealot_combat_ability_attack_speed_increased_duration",
+			},
+		},
+		bolstering_prayer = {
+			setting_id = "zealot_ability_relic",
+			buff_templates = {
+				"zealot_channel_toughness_bonus",
+				"zealot_channel_damage",
+				"zealot_channel_toughness_damage_reduction",
+			},
+		},
+		zealot_invisibility = {
+			setting_id = "zealot_ability_invisibility",
+			buff_templates = {
+				"zealot_invisibility",
+				"zealot_invisibility_increased_duration",
+				"zealot_leaving_stealth_restores_toughness",
+				"zealot_stealth_improved_with_block",
+				"zealot_decrease_threat_increase_backstab_damage",
+			},
+		},
 	},
 	psyker = {
-		psyker_shout = { setting_id = "psyker_ability_shout", buff_templates = { "psyker_shout_warp_generation_reduction" } },
+		psyker_shout = {
+			setting_id = "psyker_ability_shout",
+			buff_templates = { "psyker_shout_warp_generation_reduction" },
+		},
 		psyker_shield = { setting_id = "psyker_ability_shield", buff_templates = nil },
-		psyker_overcharge_stance = { setting_id = "psyker_ability_overcharge", buff_templates = { "psyker_overcharge_stance_damage", "psyker_overcharge_stance_finesse_damage", "psyker_overcharge_stance_infinite_casting", "psyker_overcharge_stance_cool_off" } },
+		psyker_overcharge_stance = {
+			setting_id = "psyker_ability_overcharge",
+			buff_templates = {
+				"psyker_overcharge_stance_damage",
+				"psyker_overcharge_stance_finesse_damage",
+				"psyker_overcharge_stance_infinite_casting",
+				"psyker_overcharge_stance_cool_off",
+			},
+		},
 	},
 	ogryn = {
-		ogryn_charge = { setting_id = "ogryn_ability_charge", buff_templates = { "ogryn_charge_speed_on_lunge", "ogryn_charge_trample_buff" } },
-		ogryn_gunlugger_stance = { setting_id = "ogryn_ability_ranged_stance", buff_templates = { "ogryn_ranged_stance" } },
+		ogryn_charge = {
+			setting_id = "ogryn_ability_charge",
+			buff_templates = { "ogryn_charge_speed_on_lunge", "ogryn_charge_trample_buff" },
+		},
+		ogryn_gunlugger_stance = {
+			setting_id = "ogryn_ability_ranged_stance",
+			buff_templates = { "ogryn_ranged_stance" },
+		},
 		ogryn_taunt_shout = { setting_id = "ogryn_ability_taunt", buff_templates = { "ogryn_repeat_taunt" } },
 	},
 	adamant = {
@@ -32,14 +88,33 @@ local ABILITY_GROUPS = {
 		adamant_area_buff_drone = { setting_id = "arbites_ability_drone", buff_templates = nil },
 	},
 	broker = {
-		broker_focus_stance = { setting_id = "broker_ability_focus", buff_templates = { "broker_focus_stance", "broker_focus_stance_improved" } },
-		broker_punk_rage_stance = { setting_id = "broker_ability_punk_rage", buff_templates = { "broker_punk_rage_stance" } },
+		broker_focus_stance = {
+			setting_id = "broker_ability_focus",
+			buff_templates = { "broker_focus_stance", "broker_focus_stance_improved" },
+		},
+		broker_punk_rage_stance = {
+			setting_id = "broker_ability_punk_rage",
+			buff_templates = { "broker_punk_rage_stance" },
+		},
 		broker_stimm_field = { setting_id = "broker_ability_stimm_field", buff_templates = nil },
 	},
 	cryptic = {
-		cryptic_discharge = { setting_id = "cryptic_ability_discharge", buff_templates = { "cryptic_discharge_weapon_shock_effect", "cryptic_discharge_attack_speed_increase" } },
-		cryptic_precision_stance = { setting_id = "cryptic_ability_precision_stance", buff_templates = { "cryptic_precision_stance_one_charge", "cryptic_precision_stance_two_charges", "cryptic_precision_stance_three_charges" } },
-		cryptic_chordclaw = { setting_id = "cryptic_ability_chordclaw", buff_templates = { "cryptic_chordclaw_consecutive_bonus" } },
+		cryptic_discharge = {
+			setting_id = "cryptic_ability_discharge",
+			buff_templates = { "cryptic_discharge_weapon_shock_effect", "cryptic_discharge_attack_speed_increase" },
+		},
+		cryptic_precision_stance = {
+			setting_id = "cryptic_ability_precision_stance",
+			buff_templates = {
+				"cryptic_precision_stance_one_charge",
+				"cryptic_precision_stance_two_charges",
+				"cryptic_precision_stance_three_charges",
+			},
+		},
+		cryptic_chordclaw = {
+			setting_id = "cryptic_ability_chordclaw",
+			buff_templates = { "cryptic_chordclaw_consecutive_bonus" },
+		},
 	},
 }
 
@@ -295,8 +370,12 @@ local function _get_active_deployables()
 end
 
 local function _resolve_bubble(active_deployables)
-	if mod:get("show_bubble_health") == false then return end
-	if not active_deployables or #active_deployables == 0 then return end
+	if mod:get("show_bubble_health") == false then
+		return
+	end
+	if not active_deployables or #active_deployables == 0 then
+		return
+	end
 
 	local bubble_list = {}
 	local lowest_pct = 101
@@ -319,7 +398,9 @@ local function _resolve_bubble(active_deployables)
 		end
 	end
 
-	if not any_bubble then return end
+	if not any_bubble then
+		return
+	end
 
 	state.bubble_visible = true
 	state.bubble_percent = lowest_pct
@@ -391,8 +472,12 @@ local function _resolve_charges(ability_extension)
 	local max_charges = state.max_charges
 	local charges = state.charges
 
-	if mod:get("show_charges") == false then return end
-	if max_charges <= 1 and mod:get("always_show_charges") == false then return end
+	if mod:get("show_charges") == false then
+		return
+	end
+	if max_charges <= 1 and mod:get("always_show_charges") == false then
+		return
+	end
 
 	state.charges_visible = true
 
@@ -442,13 +527,24 @@ local function _get_cooldown_color(frac)
 	return c
 end
 
-local function _resolve_timer(player_unit, archetype_name, ability_group, tracked, ability_enabled, ability_extension, buff_extension, active_deployables)
+local function _resolve_timer(
+	player_unit,
+	archetype_name,
+	ability_group,
+	tracked,
+	ability_enabled,
+	ability_extension,
+	buff_extension,
+	active_deployables
+)
 	local use_scriers = archetype_name == "psyker"
 		and ability_group == "psyker_overcharge_stance"
 		and mod:get("use_scriers_gaze_bar") ~= false
 		and buff_extension:has_buff_using_buff_template("psyker_overcharge_stance")
 
-	if not ability_enabled and not use_scriers then return end
+	if not ability_enabled and not use_scriers then
+		return
+	end
 
 	local buff_remaining, buff_duration = _get_buff_remaining_time(buff_extension, tracked.buff_templates)
 	local mode = "active"
@@ -456,7 +552,10 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 	if archetype_name == "cryptic" and ability_group == "cryptic_precision_stance" then
 		local has_stance_buff = false
 		for i = 1, #tracked.buff_templates do
-			if buff_extension:has_keyword("cryptic_precision_stance") or buff_extension:has_unique_buff_id(tracked.buff_templates[i]) then
+			if
+				buff_extension:has_keyword("cryptic_precision_stance")
+				or buff_extension:has_unique_buff_id(tracked.buff_templates[i])
+			then
 				has_stance_buff = true
 				break
 			end
@@ -718,13 +817,19 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 			local s_prog = 0
 			if fixed_active_cd_slot then
 				if is_smooth then
-					if not slot_cooldown_start[fixed_active_cd_slot] or missing_charge > slot_cooldown_start[fixed_active_cd_slot] then
+					if
+						not slot_cooldown_start[fixed_active_cd_slot]
+						or missing_charge > slot_cooldown_start[fixed_active_cd_slot]
+					then
 						slot_cooldown_start[fixed_active_cd_slot] = missing_charge
 					end
-					s_prog = (slot_cooldown_start[fixed_active_cd_slot] > 0) and math.clamp(1 - (missing_charge / slot_cooldown_start[fixed_active_cd_slot]), 0, 1) or 0
+					s_prog = (slot_cooldown_start[fixed_active_cd_slot] > 0)
+							and math.clamp(1 - (missing_charge / slot_cooldown_start[fixed_active_cd_slot]), 0, 1)
+						or 0
 				else
 					slot_cooldown_start[fixed_active_cd_slot] = nil
-					s_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1) or math.clamp(charge_progress, 0, 1)
+					s_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1)
+						or math.clamp(charge_progress, 0, 1)
 				end
 			end
 
@@ -774,10 +879,13 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 							if not slot_cooldown_start[slot_idx] or missing_charge > slot_cooldown_start[slot_idx] then
 								slot_cooldown_start[slot_idx] = missing_charge
 							end
-							s_prog = (slot_cooldown_start[slot_idx] > 0) and math.clamp(1 - (missing_charge / slot_cooldown_start[slot_idx]), 0, 1) or 0
+							s_prog = (slot_cooldown_start[slot_idx] > 0)
+									and math.clamp(1 - (missing_charge / slot_cooldown_start[slot_idx]), 0, 1)
+								or 0
 						else
 							slot_cooldown_start[slot_idx] = nil
-							s_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1) or math.clamp(charge_progress, 0, 1)
+							s_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1)
+								or math.clamp(charge_progress, 0, 1)
 						end
 						seg_fractions[slot_idx] = s_prog
 						seg_colors[slot_idx] = _get_cooldown_color(s_prog)
@@ -830,8 +938,7 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 				slot_cooldown_start = {}
 			end
 		end
-
-	elseif (num_active > 0 or has_buff) then
+	elseif num_active > 0 or has_buff then
 		current_buff_slot = nil
 		cooldown_start_value = nil
 		charge_cooldown_start = nil
@@ -870,7 +977,6 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 			end
 		end
 		state.timer_visible = true
-
 	elseif has_cd then
 		mode = "cooldown"
 		local target_timer = mod:get("cooldown_target_timer") or "next_charge"
@@ -902,7 +1008,8 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 		if is_smooth and cooldown_start_value and cooldown_start_value > 0 then
 			bar_prog = math.clamp(1 - (display_remaining / cooldown_start_value), 0, 1)
 		else
-			bar_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1) or math.clamp(charge_progress, 0, 1)
+			bar_prog = (max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1)
+				or math.clamp(charge_progress, 0, 1)
 		end
 
 		local target_bar = mod:get("cooldown_target_bar") or "until_full"
@@ -926,10 +1033,10 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 				end
 			end
 			local is_ready_block = (target_bar == "until_full" and num_segs > 1 and i <= charges)
-			seg_colors[i] = is_ready_block and { ready_color[1], ready_color[2], ready_color[3], ready_color[4] } or _get_cooldown_color(bar_prog)
+			seg_colors[i] = is_ready_block and { ready_color[1], ready_color[2], ready_color[3], ready_color[4] }
+				or _get_cooldown_color(bar_prog)
 		end
 		state.timer_visible = true
-
 	else
 		cooldown_start_value = nil
 		charge_cooldown_start = nil
@@ -952,10 +1059,18 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 
 	state.cooldown_remaining = missing_charge or 0
 	state.cooldown_duration = max_charge_cd or 0
-	state.cooldown_fraction = (max_charge_cd and max_charge_cd > 0) and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1) or charge_progress
-	state.active_remaining = (buff_remaining and buff_remaining >= MIN_TIME and buff_remaining) or (active_deployables and active_deployables[1] and active_deployables[1].remaining) or 0
-	state.active_duration = (buff_duration and buff_duration > 0 and buff_duration) or (active_deployables and active_deployables[1] and active_deployables[1].duration) or 0
-	state.active_fraction = (state.active_duration > 0) and math.clamp(state.active_remaining / state.active_duration, 0, 1) or 0
+	state.cooldown_fraction = (max_charge_cd and max_charge_cd > 0)
+			and math.clamp(1 - (missing_charge / max_charge_cd), 0, 1)
+		or charge_progress
+	state.active_remaining = (buff_remaining and buff_remaining >= MIN_TIME and buff_remaining)
+		or (active_deployables and active_deployables[1] and active_deployables[1].remaining)
+		or 0
+	state.active_duration = (buff_duration and buff_duration > 0 and buff_duration)
+		or (active_deployables and active_deployables[1] and active_deployables[1].duration)
+		or 0
+	state.active_fraction = (state.active_duration > 0)
+			and math.clamp(state.active_remaining / state.active_duration, 0, 1)
+		or 0
 
 	local total_frac = 0
 	for i = 1, num_segs do
@@ -973,7 +1088,9 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 	end
 
 	if mode == "cooldown" then
-		local cd_prog = (state.duration and state.duration > 0) and math.clamp(1 - (state.remaining / state.duration), 0, 1) or state.fraction
+		local cd_prog = (state.duration and state.duration > 0)
+				and math.clamp(1 - (state.remaining / state.duration), 0, 1)
+			or state.fraction
 		local cd_c = _get_cooldown_color(cd_prog)
 		text_color[2], text_color[3], text_color[4] = cd_c[2], cd_c[3], cd_c[4]
 	elseif mode == "ready" then
@@ -987,7 +1104,9 @@ local function _resolve_timer(player_unit, archetype_name, ability_group, tracke
 		end
 	else
 		if mod:get("use_progress_color_text") ~= false then
-			local dur_frac = (state.duration and state.duration > 0) and math.clamp(state.remaining / state.duration, 0, 1) or 0
+			local dur_frac = (state.duration and state.duration > 0)
+					and math.clamp(state.remaining / state.duration, 0, 1)
+				or 0
 			_apply_progress_color(dur_frac, text_color)
 		else
 			local c = mod:get("text_color") or { 255, 17, 90, 239 }
@@ -1048,7 +1167,9 @@ local function _resolve()
 	end
 
 	local ability_extension = ScriptUnit.has_extension(player_unit, "ability_system")
-	if not ability_extension then return end
+	if not ability_extension then
+		return
+	end
 
 	local raw_max = ability_extension:max_ability_charges(COMBAT_ABILITY)
 	local max_charges = (raw_max and raw_max > 0) and raw_max or 1
@@ -1071,9 +1192,13 @@ local function _resolve()
 	local ability_group = combat_ability and combat_ability.ability_group
 	local per_class = ABILITY_GROUPS[archetype_name]
 	local tracked = per_class and ability_group and per_class[ability_group]
-	if not tracked then return end
+	if not tracked then
+		return
+	end
 
-	if mod:get(CLASS_SETTINGS[archetype_name]) == false then return end
+	if mod:get(CLASS_SETTINGS[archetype_name]) == false then
+		return
+	end
 
 	local default_setting_id = combat_ability and BASE_COMBAT_ABILITIES[combat_ability.name]
 	local setting_id = default_setting_id or tracked.setting_id
@@ -1087,7 +1212,16 @@ local function _resolve()
 
 	local buff_extension = ScriptUnit.has_extension(player_unit, "buff_system")
 	if buff_extension then
-		_resolve_timer(player_unit, archetype_name, ability_group, tracked, ability_enabled, ability_extension, buff_extension, active_deployables)
+		_resolve_timer(
+			player_unit,
+			archetype_name,
+			ability_group,
+			tracked,
+			ability_enabled,
+			ability_extension,
+			buff_extension,
+			active_deployables
+		)
 	end
 
 	if state.timer_visible then
@@ -1120,7 +1254,6 @@ local function _resolve()
 	state.notch_width = math.max(1, tonumber(mod:get("notch_width")) or 2)
 	state.notch_color = mod:get("notch_color") or { 255, 88, 99, 80 }
 end
-
 
 mod.get_ability_state = function()
 	local time_manager = Managers.time

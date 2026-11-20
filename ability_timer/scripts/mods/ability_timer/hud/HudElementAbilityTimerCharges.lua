@@ -67,7 +67,12 @@ HudElementAbilityTimerCharges.init = function(self, parent, draw_layer, start_sc
 
 	HudElementAbilityTimerCharges.super.init(self, parent, draw_layer, start_scale, definitions)
 
-	self:set_scenegraph_position("root", 695 + (mod:get("charges_position_x") or 0), 620 + (mod:get("charges_position_y") or 0), 100)
+	self:set_scenegraph_position(
+		"root",
+		695 + (mod:get("charges_position_x") or 0),
+		620 + (mod:get("charges_position_y") or 0),
+		100
+	)
 end
 
 HudElementAbilityTimerCharges.update = function(self, dt, t, ui_renderer, render_settings, input_service)

@@ -47,9 +47,13 @@ mod.on_setting_changed = function(setting_id)
 	mod.clear_color_cache()
 
 	local ui_manager = Managers.ui
-	if not ui_manager then return end
+	if not ui_manager then
+		return
+	end
 	local hud = ui_manager._hud
-	if not hud or not hud._elements then return end
+	if not hud or not hud._elements then
+		return
+	end
 
 	local text = hud._elements["HudElementAbilityTimerText"]
 	local bar = hud._elements["HudElementAbilityTimerBar"]
@@ -57,220 +61,296 @@ mod.on_setting_changed = function(setting_id)
 	local charges = hud._elements["HudElementAbilityTimerCharges"]
 
 	if setting_id == "show_native_hud" and not mod:get("show_native_hud") then
-		if text then text:_set_visible(false) end
-		if bar then bar:_set_visible(false) end
-		if health then health:_set_visible(false) end
-		if charges then charges:_set_visible(false) end
+		if text then
+			text:_set_visible(false)
+		end
+		if bar then
+			bar:_set_visible(false)
+		end
+		if health then
+			health:_set_visible(false)
+		end
+		if charges then
+			charges:_set_visible(false)
+		end
 		return
 	end
 
 	if text then
-		text:set_scenegraph_position("root", 600 + (mod:get("timer_position_x") or 0), 620 + (mod:get("timer_position_y") or 0), 100)
+		text:set_scenegraph_position(
+			"root",
+			600 + (mod:get("timer_position_x") or 0),
+			620 + (mod:get("timer_position_y") or 0),
+			100
+		)
 	end
-	
+
 	if bar then
-		bar:set_scenegraph_position("root", 600 + (mod:get("bar_position_x") or 0), 653.6 + (mod:get("bar_position_y") or 0), 100)
+		bar:set_scenegraph_position(
+			"root",
+			600 + (mod:get("bar_position_x") or 0),
+			653.6 + (mod:get("bar_position_y") or 0),
+			100
+		)
 	end
-	
+
 	if health then
-		health:set_scenegraph_position("root", 600 + (mod:get("health_position_x") or 0), 674 + (mod:get("health_position_y") or 0), 100)
+		health:set_scenegraph_position(
+			"root",
+			600 + (mod:get("health_position_x") or 0),
+			674 + (mod:get("health_position_y") or 0),
+			100
+		)
 	end
-	
+
 	if charges then
-		charges:set_scenegraph_position("root", 695 + (mod:get("charges_position_x") or 0), 620 + (mod:get("charges_position_y") or 0), 100)
+		charges:set_scenegraph_position(
+			"root",
+			695 + (mod:get("charges_position_x") or 0),
+			620 + (mod:get("charges_position_y") or 0),
+			100
+		)
 	end
 end
 
 local COMBAT_ABILITY = "combat_ability"
 
 local function _add_deployable(unit, name, duration, icon, game_session, game_object_id, max_health)
-    if not unit then return end
+	if not unit then
+		return
+	end
 
-    local player = Managers.player and Managers.player:local_player(1)
-    local player_unit = player and player.player_unit
-    local ability_extension = player_unit and ScriptUnit.has_extension(player_unit, "ability_system")
-    local remaining_charges = ability_extension and ability_extension:remaining_ability_charges(COMBAT_ABILITY)
-    local raw_max = ability_extension and ability_extension:max_ability_charges(COMBAT_ABILITY)
-    local max_charges = (raw_max and raw_max > 0) and raw_max or 1
+	local player = Managers.player and Managers.player:local_player(1)
+	local player_unit = player and player.player_unit
+	local ability_extension = player_unit and ScriptUnit.has_extension(player_unit, "ability_system")
+	local remaining_charges = ability_extension and ability_extension:remaining_ability_charges(COMBAT_ABILITY)
+	local raw_max = ability_extension and ability_extension:max_ability_charges(COMBAT_ABILITY)
+	local max_charges = (raw_max and raw_max > 0) and raw_max or 1
 
-    local used_slots = {}
-    for _, d in pairs(mod.tracked_deployables) do
-        if d.slot then
-            used_slots[d.slot] = true
-        end
-    end
+	local used_slots = {}
+	for _, d in pairs(mod.tracked_deployables) do
+		if d.slot then
+			used_slots[d.slot] = true
+		end
+	end
 
-    local ltr = mod:get("consume_order") == "left_to_right"
-    local assigned_slot
-    if max_charges > 1 then
-        if ltr then
-            assigned_slot = 1
-            while used_slots[assigned_slot] and assigned_slot < max_charges do
-                assigned_slot = assigned_slot + 1
-            end
-        else
-            assigned_slot = max_charges
-            while used_slots[assigned_slot] and assigned_slot > 1 do
-                assigned_slot = assigned_slot - 1
-            end
-        end
-    else
-        assigned_slot = 1
-    end
+	local ltr = mod:get("consume_order") == "left_to_right"
+	local assigned_slot
+	if max_charges > 1 then
+		if ltr then
+			assigned_slot = 1
+			while used_slots[assigned_slot] and assigned_slot < max_charges do
+				assigned_slot = assigned_slot + 1
+			end
+		else
+			assigned_slot = max_charges
+			while used_slots[assigned_slot] and assigned_slot > 1 do
+				assigned_slot = assigned_slot - 1
+			end
+		end
+	else
+		assigned_slot = 1
+	end
 
-    mod.tracked_deployables[unit] = {
-        name = name,
-        start_time = Managers.time:time("gameplay"),
-        duration = duration,
-        icon = icon,
-        game_session = game_session,
-        game_object_id = game_object_id,
-        max_health = max_health,
-        current_health = max_health,
-        damage_taken = 0,
-        last_poll_time = -math.huge,
-        slot = assigned_slot,
-    }
+	mod.tracked_deployables[unit] = {
+		name = name,
+		start_time = Managers.time:time("gameplay"),
+		duration = duration,
+		icon = icon,
+		game_session = game_session,
+		game_object_id = game_object_id,
+		max_health = max_health,
+		current_health = max_health,
+		damage_taken = 0,
+		last_poll_time = -math.huge,
+		slot = assigned_slot,
+	}
 end
 
 local function _remove_deployable(unit)
-    if not unit then return end
-    mod.tracked_deployables[unit] = nil
+	if not unit then
+		return
+	end
+	mod.tracked_deployables[unit] = nil
 end
 
-mod:hook_safe("PsykerForceFieldUnitExtension", "init", function(self, context, unit, extension_init_data, game_session, game_object_id)
-    local owner_unit = self.owner_unit or extension_init_data.owner_unit
-    local local_player = Managers.player:local_player(1)
+mod:hook_safe(
+	"PsykerForceFieldUnitExtension",
+	"init",
+	function(self, context, unit, extension_init_data, game_session, game_object_id)
+		local owner_unit = self.owner_unit or extension_init_data.owner_unit
+		local local_player = Managers.player:local_player(1)
 
-    if local_player and owner_unit == local_player.player_unit then
-        local icon = "content/ui/textures/icons/abilities/hud/psyker/psyker_ability_force_field"
-        local talent_settings = require("scripts/settings/talent/talent_settings")
-        local shield_settings = talent_settings.psyker_3.combat_ability
-        local is_bubble = self:is_sphere_shield()
-        local max_health = is_bubble and shield_settings.sphere_health or shield_settings.health
+		if local_player and owner_unit == local_player.player_unit then
+			local icon = "content/ui/textures/icons/abilities/hud/psyker/psyker_ability_force_field"
+			local talent_settings = require("scripts/settings/talent/talent_settings")
+			local shield_settings = talent_settings.psyker_3.combat_ability
+			local is_bubble = self:is_sphere_shield()
+			local max_health = is_bubble and shield_settings.sphere_health or shield_settings.health
 
-        _add_deployable(unit, "psyker_shield", self._max_duration or 20, icon, game_session, game_object_id, max_health)
-    end
-end)
+			_add_deployable(
+				unit,
+				"psyker_shield",
+				self._max_duration or 20,
+				icon,
+				game_session,
+				game_object_id,
+				max_health
+			)
+		end
+	end
+)
 
 mod:hook_safe("PsykerForceFieldUnitExtension", "on_death", function(self)
-    _remove_deployable(self._unit)
+	_remove_deployable(self._unit)
 end)
 
 mod:hook_safe("PsykerForceFieldUnitExtension", "destroy", function(self)
-    _remove_deployable(self._unit)
+	_remove_deployable(self._unit)
 end)
 
 mod:hook_safe("PsykerForceFieldUnitExtension", "game_object_initialized", function(self, session, object_id)
-    local deployable = mod.tracked_deployables[self._unit]
-    if deployable and deployable.name == "psyker_shield" then
-        deployable.game_session = session
-        deployable.game_object_id = object_id
-    end
+	local deployable = mod.tracked_deployables[self._unit]
+	if deployable and deployable.name == "psyker_shield" then
+		deployable.game_session = session
+		deployable.game_object_id = object_id
+	end
 end)
 
 mod:hook_safe("UnitSpawnerManager", "spawn_husk_unit", function(self, game_object_id, owner_id)
-    local session = self._game_session
-    local unit = self._network_units[game_object_id]
-    if not unit then return end
+	local session = self._game_session
+	local unit = self._network_units[game_object_id]
+	if not unit then
+		return
+	end
 
-    local local_player = Managers.player:local_player(1)
-    if not local_player then return end
+	local local_player = Managers.player:local_player(1)
+	if not local_player then
+		return
+	end
 
-    local unit_template_id = GameSession.game_object_field(session, game_object_id, "unit_template")
-    local unit_template_name = self._unit_template_network_lookup[unit_template_id]
+	local unit_template_id = GameSession.game_object_field(session, game_object_id, "unit_template")
+	local unit_template_name = self._unit_template_network_lookup[unit_template_id]
 
-    if unit_template_name == "broker_stimm_field_crate_deployable" then
-        local owner_unit_id = GameSession.game_object_field(session, game_object_id, "owner_unit_id")
-        if owner_unit_id ~= NetworkConstants.invalid_game_object_id then
-            local owner_unit = Managers.state.unit_spawner:unit(owner_unit_id)
-            if owner_unit and owner_unit == local_player.player_unit then
-                local talent_settings = require("scripts/settings/talent/talent_settings")
-                local ability_settings = talent_settings.broker.combat_ability.stimm_field
-                local lifetime = ability_settings.life_time
+	if unit_template_name == "broker_stimm_field_crate_deployable" then
+		local owner_unit_id = GameSession.game_object_field(session, game_object_id, "owner_unit_id")
+		if owner_unit_id ~= NetworkConstants.invalid_game_object_id then
+			local owner_unit = Managers.state.unit_spawner:unit(owner_unit_id)
+			if owner_unit and owner_unit == local_player.player_unit then
+				local talent_settings = require("scripts/settings/talent/talent_settings")
+				local ability_settings = talent_settings.broker.combat_ability.stimm_field
+				local lifetime = ability_settings.life_time
 
-                local owner_talent_extension = ScriptUnit.has_extension(owner_unit, "talent_system")
-                if owner_talent_extension and owner_talent_extension:has_special_rule("broker_stimm_field_linger") then
-                    lifetime = ability_settings.sub_1_life_time
-                end
+				local owner_talent_extension = ScriptUnit.has_extension(owner_unit, "talent_system")
+				if owner_talent_extension and owner_talent_extension:has_special_rule("broker_stimm_field_linger") then
+					lifetime = ability_settings.sub_1_life_time
+				end
 
-                _add_deployable(unit, "broker_stimm_field", lifetime, "content/ui/textures/icons/buffs/hud/broker/broker_stimm_field")
-            end
-        end
+				_add_deployable(
+					unit,
+					"broker_stimm_field",
+					lifetime,
+					"content/ui/textures/icons/buffs/hud/broker/broker_stimm_field"
+				)
+			end
+		end
+	elseif unit_template_name == "item_deployable_projectile" then
+		local owner_unit_id = GameSession.game_object_field(session, game_object_id, "owner_unit_id")
+		if owner_unit_id ~= NetworkConstants.invalid_game_object_id then
+			local owner_unit = Managers.state.unit_spawner:unit(owner_unit_id)
+			if owner_unit and owner_unit == local_player.player_unit then
+				local item_id = GameSession.game_object_field(session, game_object_id, "item_id")
+				local item_name = NetworkLookup.player_item_names[item_id]
 
-    elseif unit_template_name == "item_deployable_projectile" then
-        local owner_unit_id = GameSession.game_object_field(session, game_object_id, "owner_unit_id")
-        if owner_unit_id ~= NetworkConstants.invalid_game_object_id then
-            local owner_unit = Managers.state.unit_spawner:unit(owner_unit_id)
-            if owner_unit and owner_unit == local_player.player_unit then
-                local item_id = GameSession.game_object_field(session, game_object_id, "item_id")
-                local item_name = NetworkLookup.player_item_names[item_id]
-
-                if item_name == "content/items/weapons/player/drone_area_buff" then
-                    _add_deployable(unit, "adamant_drone", 20, "content/ui/textures/icons/abilities/hud/adamant/adamant_ability_area_buff_drone")
-                end
-            end
-        end
-    end
+				if item_name == "content/items/weapons/player/drone_area_buff" then
+					_add_deployable(
+						unit,
+						"adamant_drone",
+						20,
+						"content/ui/textures/icons/abilities/hud/adamant/adamant_ability_area_buff_drone"
+					)
+				end
+			end
+		end
+	end
 end)
 
 mod:hook_safe("UnitSpawnerManager", "_remove_network_unit", function(self, unit)
-    _remove_deployable(unit)
+	_remove_deployable(unit)
 end)
 
 mod:hook_safe("ProximityBrokerStimmField", "init", function(self, context, init_data, owner_unit)
-    local local_player = Managers.player and Managers.player:local_player(1)
-    if local_player and owner_unit == local_player.player_unit then
-        _add_deployable(self._unit, "broker_stimm_field", self._life_time, "content/ui/textures/icons/buffs/hud/broker/broker_stimm_field")
-    end
+	local local_player = Managers.player and Managers.player:local_player(1)
+	if local_player and owner_unit == local_player.player_unit then
+		_add_deployable(
+			self._unit,
+			"broker_stimm_field",
+			self._life_time,
+			"content/ui/textures/icons/buffs/hud/broker/broker_stimm_field"
+		)
+	end
 end)
 
 mod:hook_safe("ProximityAreaBuffDrone", "init", function(self, context, init_data, owner_unit)
-    local local_player = Managers.player and Managers.player:local_player(1)
-    if local_player and owner_unit == local_player.player_unit then
-        _add_deployable(self._unit, "adamant_drone", self._life_time, "content/ui/textures/icons/abilities/hud/adamant/adamant_ability_area_buff_drone")
-    end
+	local local_player = Managers.player and Managers.player:local_player(1)
+	if local_player and owner_unit == local_player.player_unit then
+		_add_deployable(
+			self._unit,
+			"adamant_drone",
+			self._life_time,
+			"content/ui/textures/icons/abilities/hud/adamant/adamant_ability_area_buff_drone"
+		)
+	end
 end)
 
 local POLL_INTERVAL = 0.05
 
 local function _update_bubble_health(unit, health_extension, game_session, game_object_id, is_server)
-    local deployable = mod.tracked_deployables[unit]
-    if not deployable or deployable.name ~= "psyker_shield" then return end
+	local deployable = mod.tracked_deployables[unit]
+	if not deployable or deployable.name ~= "psyker_shield" then
+		return
+	end
 
-    if not is_server then
-        if game_session and game_object_id then
-            deployable.current_health = GameSession.game_object_field(game_session, game_object_id, "health") or deployable.max_health
-        end
-    else
-        if health_extension then
-            deployable.current_health = health_extension:current_health() or deployable.max_health
-        end
-    end
+	if not is_server then
+		if game_session and game_object_id then
+			deployable.current_health = GameSession.game_object_field(game_session, game_object_id, "health")
+				or deployable.max_health
+		end
+	else
+		if health_extension then
+			deployable.current_health = health_extension:current_health() or deployable.max_health
+		end
+	end
 
-    deployable.damage_taken = math.max(0, deployable.max_health - deployable.current_health)
+	deployable.damage_taken = math.max(0, deployable.max_health - deployable.current_health)
 end
 
 mod:hook_safe("PsykerForceFieldUnitHealthExtension", "_add_damage", function(self, damage)
-    local unit = self._unit
-    local deployable = mod.tracked_deployables[unit]
-    if deployable and deployable.name == "psyker_shield" then
-        _update_bubble_health(unit, self, self._game_session, self._game_object_id, true)
-    end
+	local unit = self._unit
+	local deployable = mod.tracked_deployables[unit]
+	if deployable and deployable.name == "psyker_shield" then
+		_update_bubble_health(unit, self, self._game_session, self._game_object_id, true)
+	end
 end)
 
 mod:hook_safe("PsykerForceFieldUnitExtension", "fixed_update", function(self, unit, dt, t)
-    local deployable = mod.tracked_deployables[unit]
-    if not deployable or deployable.name ~= "psyker_shield" then return end
-    if (t - deployable.last_poll_time) <= POLL_INTERVAL then return end
+	local deployable = mod.tracked_deployables[unit]
+	if not deployable or deployable.name ~= "psyker_shield" then
+		return
+	end
+	if (t - deployable.last_poll_time) <= POLL_INTERVAL then
+		return
+	end
 
-    _update_bubble_health(unit, self._health_extension, self._game_session, self._game_object_id, self._is_server)
-    deployable.last_poll_time = t
+	_update_bubble_health(unit, self._health_extension, self._game_session, self._game_object_id, self._is_server)
+	deployable.last_poll_time = t
 end)
 
 mod.on_all_mods_loaded = function()
 	local hud_studio = get_mod("hud_studio")
-	if not hud_studio then return end
+	if not hud_studio then
+		return
+	end
 
 	hud_studio.register_blocks(mod, {
 		author = "IndicaBunny",
@@ -289,7 +369,12 @@ mod.on_all_mods_loaded = function()
 		mod:hook(Straight, "draw", function(func, ctx, ...)
 			local at_state = mod.get_ability_state()
 			local fill_c = ctx.fill_color
-			local is_at_bar = fill_c and (fill_c._is_at_bar or fill_c._at_segment_colors ~= nil or (at_state and fill_c == at_state.bar_color))
+			local is_at_bar = fill_c
+				and (
+					fill_c._is_at_bar
+					or fill_c._at_segment_colors ~= nil
+					or (at_state and fill_c == at_state.bar_color)
+				)
 
 			if not is_at_bar then
 				return func(ctx, ...)
@@ -308,7 +393,9 @@ mod.on_all_mods_loaded = function()
 			local orig_rect = d.rect
 			local orig_tex = d.texture
 
-			local vertical = ctx.orientation == "top_bottom" or ctx.orientation == "bottom_top" or ctx.orientation == "center_vertical"
+			local vertical = ctx.orientation == "top_bottom"
+				or ctx.orientation == "bottom_top"
+				or ctx.orientation == "center_vertical"
 			local axis_len = vertical and ctx.h or ctx.w
 			local num_segs = ctx.segments or 1
 			local is_center = ctx.orientation == "center" or ctx.orientation == "center_vertical"
@@ -360,10 +447,31 @@ mod.on_all_mods_loaded = function()
 				ctx.fraction = 0
 			elseif seg_colors and #seg_colors > 1 then
 				d.rect = function(self, rx, ry, rz, rw, rh, color, r)
-					return orig_rect(self, rx, ry, rz, rw, rh, (color == ctx.fill_color and _get_seg_color(rx, ry, rw, rh)) or color, r)
+					return orig_rect(
+						self,
+						rx,
+						ry,
+						rz,
+						rw,
+						rh,
+						(color == ctx.fill_color and _get_seg_color(rx, ry, rw, rh)) or color,
+						r
+					)
 				end
 				d.texture = function(self, mat, rx, ry, rz, rw, rh, color, uv, r, hold)
-					return orig_tex(self, mat, rx, ry, rz, rw, rh, (color == ctx.fill_color and _get_seg_color(rx, ry, rw, rh)) or color, uv, r, hold)
+					return orig_tex(
+						self,
+						mat,
+						rx,
+						ry,
+						rz,
+						rw,
+						rh,
+						(color == ctx.fill_color and _get_seg_color(rx, ry, rw, rh)) or color,
+						uv,
+						r,
+						hold
+					)
 				end
 			end
 
@@ -375,7 +483,9 @@ mod.on_all_mods_loaded = function()
 
 			if has_multi_frac then
 				for j = 0, draw_segs - 1 do
-					local seg_idx = is_center and (math.clamp(math.floor(math.abs(j - (num_segs - 0.5))) + 1, 1, num_segs)) or (j + 1)
+					local seg_idx = is_center
+							and (math.clamp(math.floor(math.abs(j - (num_segs - 0.5))) + 1, 1, num_segs))
+						or (j + 1)
 					local s_frac = math.clamp(seg_fractions[seg_idx] or 0, 0, 1)
 					if s_frac > 0 then
 						local s_color = seg_colors and seg_colors[seg_idx] or ctx.fill_color
@@ -434,7 +544,8 @@ mod.on_all_mods_loaded = function()
 					local ui_scale = (RESOLUTION_LOOKUP and RESOLUTION_LOOKUP.scale) or 1
 					local desired_notch_px = math.max(1, math.round((at_state.notch_width or 2) * (ctx.scale or 1)))
 					local notch_thick = desired_notch_px / ui_scale
-					local notch_len = math.max(2, math.floor((vertical and ctx.w or ctx.h) * (at_state.notch_len_pct or 0.5)))
+					local notch_len =
+						math.max(2, math.floor((vertical and ctx.w or ctx.h) * (at_state.notch_len_pct or 0.5)))
 					local rw = vertical and notch_len or notch_thick
 					local rh = vertical and notch_thick or notch_len
 
@@ -456,7 +567,8 @@ mod.on_all_mods_loaded = function()
 
 						for k = 1, notches_per_seg do
 							local raw_pos = seg_pos + math.floor((k / (notches_per_seg + 1)) * cell_len)
-							local screen_axis = math.floor(raw_pos * ui_scale + 0.5) - math.floor(desired_notch_px * 0.5)
+							local screen_axis = math.floor(raw_pos * ui_scale + 0.5)
+								- math.floor(desired_notch_px * 0.5)
 							local snapped_pos = screen_axis / ui_scale
 
 							local rx = vertical and ctx.x or snapped_pos
@@ -509,7 +621,12 @@ mod.on_all_mods_loaded = function()
 		mod:hook(Ring, "draw", function(func, ctx, ...)
 			local at_state = mod.get_ability_state()
 			local fill_c = ctx.fill_color
-			local is_at_bar = fill_c and (fill_c._is_at_bar or fill_c._at_segment_colors ~= nil or (at_state and fill_c == at_state.bar_color))
+			local is_at_bar = fill_c
+				and (
+					fill_c._is_at_bar
+					or fill_c._at_segment_colors ~= nil
+					or (at_state and fill_c == at_state.bar_color)
+				)
 
 			if not is_at_bar then
 				return func(ctx, ...)
@@ -641,7 +758,12 @@ mod.on_all_mods_loaded = function()
 		mod:hook(Curved, "draw", function(func, ctx, ...)
 			local at_state = mod.get_ability_state()
 			local fill_c = ctx.fill_color
-			local is_at_bar = fill_c and (fill_c._is_at_bar or fill_c._at_segment_colors ~= nil or (at_state and fill_c == at_state.bar_color))
+			local is_at_bar = fill_c
+				and (
+					fill_c._is_at_bar
+					or fill_c._at_segment_colors ~= nil
+					or (at_state and fill_c == at_state.bar_color)
+				)
 
 			if not is_at_bar then
 				return func(ctx, ...)
@@ -722,5 +844,4 @@ mod.on_all_mods_loaded = function()
 			return res
 		end)
 	end
-
 end

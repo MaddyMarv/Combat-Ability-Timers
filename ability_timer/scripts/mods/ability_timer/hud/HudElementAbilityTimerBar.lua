@@ -110,7 +110,12 @@ HudElementAbilityTimerBar.init = function(self, parent, draw_layer, start_scale)
 
 	HudElementAbilityTimerBar.super.init(self, parent, draw_layer, start_scale, definitions)
 
-	self:set_scenegraph_position("root", 600 + (mod:get("bar_position_x") or 0), 654 + (mod:get("bar_position_y") or 0), 100)
+	self:set_scenegraph_position(
+		"root",
+		600 + (mod:get("bar_position_x") or 0),
+		654 + (mod:get("bar_position_y") or 0),
+		100
+	)
 end
 
 HudElementAbilityTimerBar.update = function(self, dt, t, ui_renderer, render_settings, input_service)
@@ -215,7 +220,8 @@ HudElementAbilityTimerBar.update = function(self, dt, t, ui_renderer, render_set
 			bg_style.color[1] = 160 * alpha
 
 			local is_ready_block = (num_segments > 1 and i <= charges) or ability_state.mode == "ready"
-			local seg_color = (ability_state.segment_colors and ability_state.segment_colors[i]) or (is_ready_block and ready_color or src_color)
+			local seg_color = (ability_state.segment_colors and ability_state.segment_colors[i])
+				or (is_ready_block and ready_color or src_color)
 			fill_style.color[1] = (seg_color[1] or 255) * alpha
 			fill_style.color[2] = seg_color[2]
 			fill_style.color[3] = seg_color[3]
@@ -350,10 +356,18 @@ end
 HudElementAbilityTimerBar._set_visible = function(self, visible)
 	local widgets = self._widgets_by_name
 	if not visible and widgets then
-		if widgets.bar_bg then widgets.bar_bg.content.visible = false end
-		if widgets.bar_fill then widgets.bar_fill.content.visible = false end
-		if widgets.bar_notches then widgets.bar_notches.content.visible = false end
-		if widgets.bracket then widgets.bracket.content.visible = false end
+		if widgets.bar_bg then
+			widgets.bar_bg.content.visible = false
+		end
+		if widgets.bar_fill then
+			widgets.bar_fill.content.visible = false
+		end
+		if widgets.bar_notches then
+			widgets.bar_notches.content.visible = false
+		end
+		if widgets.bracket then
+			widgets.bracket.content.visible = false
+		end
 	end
 end
 
