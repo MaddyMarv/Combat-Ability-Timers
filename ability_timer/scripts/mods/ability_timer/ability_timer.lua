@@ -2,7 +2,7 @@ local mod = get_mod("ability_timer")
 
 mod.tracked_deployables = mod.tracked_deployables or {}
 
-mod:io_dofile("ability_timer/scripts/mods/ability_timer/ability_state")
+mod:io_dofile("ability_timer/scripts/mods/ability_timer/helpers/ability_state")
 
 local packages_to_load = {
 	"packages/ui/hud/player_buffs/player_buffs",
