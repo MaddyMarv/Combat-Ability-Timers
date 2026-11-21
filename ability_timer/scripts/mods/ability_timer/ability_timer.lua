@@ -123,7 +123,6 @@ local function _add_deployable(unit, name, duration, icon, game_session, game_ob
 	local player = Managers.player and Managers.player:local_player(1)
 	local player_unit = player and player.player_unit
 	local ability_extension = player_unit and ScriptUnit.has_extension(player_unit, "ability_system")
-	local remaining_charges = ability_extension and ability_extension:remaining_ability_charges(COMBAT_ABILITY)
 	local raw_max = ability_extension and ability_extension:max_ability_charges(COMBAT_ABILITY)
 	local max_charges = (raw_max and raw_max > 0) and raw_max or 1
 
@@ -674,7 +673,7 @@ mod.on_all_mods_loaded = function()
 
 			for i = 0, segments - 1 do
 				local seg_idx = i + 1
-				local s_frac = 0
+				local s_frac
 				if seg_fractions and seg_fractions[seg_idx] ~= nil then
 					s_frac = math.clamp(seg_fractions[seg_idx], 0, 1)
 				else

@@ -170,7 +170,6 @@ local state = {
 local last_resolve_time = nil
 local cooldown_start_value = nil
 local charge_cooldown_start = nil
-local slot_last_active_time = {}
 local slot_cooldown_start = {}
 local fixed_active_cd_slot = nil
 local fixed_queued_cd_slots = {}
@@ -624,7 +623,6 @@ local function _resolve_timer(
 	end
 
 	local ready_color = mod:get("ready_charge_color") or { 255, 80, 145, 255 }
-	local cd_color = mod:get("cooldown_color") or { 255, 120, 70, 255 }
 
 	local seg_fractions = {}
 	local seg_colors = {}
@@ -784,10 +782,8 @@ local function _resolve_timer(
 			current_buff_slot = nil
 		end
 
-		local t = (Managers.time and Managers.time:has_timer("gameplay")) and Managers.time:time("gameplay") or 0
 		local any_active = false
 		for s, d in pairs(active_by_slot) do
-			slot_last_active_time[s] = t
 			slot_cooldown_start[s] = nil
 		end
 
@@ -900,7 +896,6 @@ local function _resolve_timer(
 
 		if not any_active then
 			if charges == max_charges then
-				slot_last_active_time = {}
 				slot_cooldown_start = {}
 				cooldown_start_value = nil
 				charge_cooldown_start = nil
