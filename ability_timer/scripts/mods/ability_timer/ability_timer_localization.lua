@@ -4,7 +4,7 @@ return {
 		["zh-cn"] = "技能计时器",
 	},
 	mod_description = {
-		en = "HUD countdown timer showing the active duration of your combat ability.",
+		en = "HUD countdown timer showing the active duration of your combat ability. Also tracks charges and cooldown.",
 		["zh-cn"] = "在 HUD 上显示战斗技能剩余持续时间的倒计时。",
 	},
 	display_mode = {
