@@ -62,4 +62,4 @@ HUD countdown timer showing the active duration of your combat ability.
 [/spoiler]
 
 [b]Links:[/b]
-[url=https://github.com/MaddyMarv/Combat-Ability-timers]Source Code[/url] | [url=https://www.nexusmods.com/profile/indicabunny]Nexus Mods Profile[/url] | [url=https://ko-fi.com/indicabunny]Support Me on Ko-fi[/url]
+[url=https://github.com/MaddyMarv/Combat-Ability-Timers]Source Code[/url] | [url=https://www.nexusmods.com/profile/indicabunny]Nexus Mods Profile[/url] | [url=https://ko-fi.com/indicabunny]Support Me on Ko-fi[/url]

@@ -65,4 +65,4 @@ HUD countdown timer showing the active duration of your combat ability.
 - Skitarii (Starter Ability (Voltaic Expander), Voltaic Emitter, Advanced Combat Doctrines, Chordclaw Strike)
 </details>
 
-🔗 **Links:** [Source Code](https://github.com/MaddyMarv/Combat-Ability-timers) | [Nexus Mods Profile](https://www.nexusmods.com/profile/indicabunny) | [Support Me on Ko-fi](https://ko-fi.com/indicabunny)
+🔗 **Links:** [Source Code](https://github.com/MaddyMarv/Combat-Ability-Timers) | [Nexus Mods Profile](https://www.nexusmods.com/profile/indicabunny) | [Support Me on Ko-fi](https://ko-fi.com/indicabunny)
